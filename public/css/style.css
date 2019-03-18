@@ -1,0 +1,18 @@
+.dropdown-menu>li>a:hover {
+    background-color: lightgray;
+}
+
+.help-block, .delete{
+	color: red;
+}
+
+.error-data {
+    color: red;
+    font-size: 25px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.link-insc{
+	font-weight: bold;
+}

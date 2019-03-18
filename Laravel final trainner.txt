@@ -1,0 +1,246 @@
+Cosas laravel 5
+_____________________________________________________________________________
+
+INSTALAR LARAVEL VIA COMPOSER:
+
+composer create-project --prefer-dist laravel/laravel blog
+
+______________________________________________
+
+
+Crear Proyecto nuevo desde cmd:
+
+composer create-project laravel/laravel=5.0 nameproject
+
+______________________________________________________________________________
+
+Poner nombre a la app:
+
+php artisan app:name gestor_img
+
+_______________________________________________________________________________
+
+Migraciones para bases de datos:
+
+php artisan list = Muestra todas las opciones.
+
+*php artisan make:migration --create="albunes" CrearTablaAlbunes, despues se hace la estructura dentro de estas
+
+________________________________________________________________________________
+
+CRAER MODELOS LARAVEL (-m crea la migración tambien):
+
+php artisan make:model Noticias -m
+
+______________________________________________
+
+Creando tablas por medio de migraciones en la base de datos:
+
+php artisan migrate
+
+____________________________________________________________________________________
+
+SQLSTATE[42000]: Syntax error or access violation: 1071 Specified key was too long; max key length is 767 bytes :
+
+AppServiceProvider.php
+
+use Illuminate\Support\Facades\Schema;
+
+public function boot()
+{
+    Schema::defaultStringLength(191);
+}
+
+_____________________________________________________________________________________
+
+Creando seeds con insert automatico (Para insertar muchos datos con codigo):
+(Carpeta database - seeds)
+
+*composer dumpautoload
+*php artisan db:seed
+
+_____________________________________________________________________________________
+
+Cambiar mensaje de error
+
+*Dentro de la carpeta exception se manipula el archivo Hendler.php
+*Poner en el .env APP_DEBUG=false
+
+______________________________________________________________________________________
+
+IMPORTANTE PARA LA VALIDACION DE USUARIO
+
+*Cambiar o fijarse en el nombre del modelo de usuario en la ruta Config - auth.php
+*Revisar archi Registrar.php ruta: app-Services.
+
+_____________________________________________________________________________________
+
+Creando Request Laravel 5 para validar peticiones
+
+php artisan make:request IniciarSesionRequest
+
+ruta: app - Requests
+
+____________________________________________________________________________________
+
+Saber la Versión de Laravel:
+
+php artisan --version
+
+______________________ULTIMATE_____________________________________________________
+
+lIMPIAR CACHE EN LARAVEL
+
+php artisan cache:clear
+php artisan config:cache
+
+______________________________________________________________________________
+
+EJECUTAR SEMILLAS
+
+php artisan db:seed
+
+______________________________________________________________________________
+
+FORMAS DE PASAR VARIABLES A LA VISTA DIRECTAMENTE:
+
+return view('welcome', ['nombre' => 'Frank']);
+
+   
+return view('welcome')->with('nombre', 'Frank');
+
+    
+return view('welcome')->withNombre('Frank');
+
+_____________________________________________________________________________________
+
+CREAR CONTROLLERS:
+
+php artisan make:controller PostsController
+
+_____________________________________________________________________________________
+
+CREAR MIGRACIONES:
+
+php artisan make:migration create_post_table
+
+_____________________________________________________________________________________
+
+Actualizar migraciones para cuando elimines o muevas las migraciones hechas.
+
+composer dump-autoload
+
+______________________________________________________________________________________
+
+CREAR REQUEST DE VALIDACIONES Y DE AUTORIZACIÓN
+
+php artisan make:request CreatePostRequest
+
+_______________________________________________________________________________________
+
+ESTANCIAS DATOS DE PRUEBA - INSERTAR DATOS MASIVAMENTE DE PRUEBA
+
+*Buscar ModelFactory.php
+
+*Se copian y se cambian las variables correspondientes.
+
+*php artisan tinker
+
+*factory(App\Post::class)->make()
+
+*factory(App\Post::class)->create()
+
+*factory(App\Post::class, 200)->create() = Insertar 200 registros aleatorios. 
+_________________________________________________________________________________________
+
+CREAR MODULOS PARA USUARIOS:
+
+*php artisan make:auth
+
+_________________________________________________________________________________________
+
+REFRESCAR MIGRACIONES (VOLVERLAS A CREAR SIN DATOS)
+
+*php artisan migrate:refresh
+
+_____________________________________________________________________________________________
+
+CREAR USUARIO CON POST VINCULADO TINKER - FACTORY:
+
+--UNA VES HECHO LAS RELACIONES EN LOS MODELOS--
+
+*$user = factory(App\User::class)->create()
+
+*$post = factory(App\Post::class)->create(['user_id' => $user ->id])
+
+PROBANDO RELACIONES CREADAS:
+
+*$post->user
+
+PROBANDO RELACIONES VUELTO A INICIAR TINKER:
+
+*$user = App\User::find(202)
+
+*$user->posts
+
+_______________________________________________________________________________________________
+
+CORREGIR ERROR (Failed opening required bootstrap/../vendor/autoload.php)
+
+*composer update --no-scripts
+
+_______________________________________________________________________________________________ 
+
+CORREGIR ERROR (EncryptionServiceProvider.php line 45)
+
+*php artisan key:generate
+*php artisan config:cache
+
+___________________NEW PRACTICA____________________________
+
+Error instalacion "npm-install" npm WARN deprecated....
+
+npm cache clean --force
+
+*Crear modelo con migracion:
+
+php artisan make:model Idea -m
+__________________________________________________________
+
+Instalar Entorno front:
+
+*npm install
+
+____________________________________________________________
+
+*comoposer dump-autoload = actualizar migraciones que se han eliminado
+
+*Luego ejecutamos migraciones: php artisan migrate:refresh
+
+_____________________________________________________________
+
+*Crear Controller = php artisan make:controller IdeaController
+
+____________________________________________________________
+
+Instalar moment (Formatear Fecha) = npm install moment --save
+
+Instalar toastr (Alertas Atractivos) = npm install toastr --save
+
+___________________________________________________________________
+
+Generar token cabecera meta datos = <meta name="csrf-token" content="{{ csrf_token() }}">
+
+____________________________________________________________________
+
+Correr front en modo PRODUCCION: npm run production
+
+
+
+
+
+
+
+
+
+
